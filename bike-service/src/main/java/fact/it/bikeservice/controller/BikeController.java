@@ -1,11 +1,15 @@
 package fact.it.bikeservice.controller;
 
-import fact.it.bikeservice.dto.BikeDto;
+import fact.it.bikeservice.dto.BikeResponse;
+import fact.it.bikeservice.dto.BikeRequest;
 import fact.it.bikeservice.service.BikeService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/bike")
@@ -15,10 +19,26 @@ public class BikeController {
     public BikeController(BikeService bikeService) {
         this.bikeService = bikeService;
     }
-    @GetMapping("")
-    public List<BikeDto> getBikes() {
-        List<BikeDto> bikeDtos = bikeService.getBikes();
 
-        return bikeDtos;
+    @GetMapping
+    public List<BikeResponse> getBikes() {
+        return bikeService.getBikes();
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<BikeResponse> getBikeById(@PathVariable Long id) {
+        Optional<BikeResponse> bikeDtoOptional = this.bikeService.getBikeById(id);
+
+        return bikeDtoOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<BikeResponse> createBike(@RequestBody BikeRequest bikeRequest, HttpServletRequest request) {
+        BikeResponse bikeResponse = this.bikeService.addBike(bikeRequest);
+        String host = request.getHeader("Host");
+        /* FIXME: hardcoded protocol? meh, we'll never use https anyways */
+        URI location = URI.create("http://%s/api/bike/%d".formatted(host, bikeResponse.getId()));
+
+        return ResponseEntity.created(location).body(bikeResponse);
     }
 }

@@ -6,8 +6,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BikeDto {
-    private Long id;
+public class BikeRequest {
     private int year;
-    private String name;
+    private String model;
+    private String manufacturer;
 }

@@ -1,13 +1,14 @@
 package fact.it.bikeservice.service;
 
-import fact.it.bikeservice.dto.BikeDto;
+import fact.it.bikeservice.dto.BikeResponse;
+import fact.it.bikeservice.dto.BikeRequest;
 import fact.it.bikeservice.model.Bike;
 import fact.it.bikeservice.repository.BikeRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BikeService {
@@ -18,8 +19,7 @@ public class BikeService {
     }
 
     @PostConstruct
-    public void addBikes()
-    {
+    private void addBikes() {
         if(bikeRepository.count() > 0)
             return;
         bikeRepository.save(new Bike(2019, "Model S", "Trek"));
@@ -34,25 +34,36 @@ public class BikeService {
         bikeRepository.save(new Bike(2021, "Road King", "Yamaha"));
     }
 
-    public List<BikeDto> getBikes()
-    {
+    public List<BikeResponse> getBikes() {
         List<Bike> bikes = bikeRepository.findAll();
 
         return bikes.stream()
-                .map(bike -> getBikeDto(bike))
+                .map(this::getBikeDto)
                 .toList();
     }
 
-    private BikeDto getBikeDto(Bike bike)
-    {
-        BikeDto bikeDto = new BikeDto();
+    public Optional<BikeResponse> getBikeById(long id) {
+        Optional<Bike> bike = bikeRepository.findById(id);
 
-        bikeDto.setId(bike.getId());
-        bikeDto.setYear(bike.getYear());
-        bikeDto.setName(String.format("%s %s",
-                                      bike.getManufacturer(),
-                                      bike.getModel()));
+        return bike.map(this::getBikeDto);
+    }
 
-        return bikeDto;
+    public BikeResponse addBike(BikeRequest bikeRequest) {
+        Bike bike = Bike.builder()
+                .year(bikeRequest.getYear())
+                .manufacturer(bikeRequest.getManufacturer())
+                .model(bikeRequest.getModel())
+                .build();
+
+        return getBikeDto(this.bikeRepository.save(bike));
+    }
+
+    private BikeResponse getBikeDto(Bike bike) {
+        return BikeResponse.builder()
+                .id(bike.getId())
+                .year(bike.getYear())
+                .manufacturer(bike.getManufacturer())
+                .model(bike.getModel())
+                .build();
     }
 }
