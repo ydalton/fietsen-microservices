@@ -1,0 +1,6 @@
+# This file is for actually running the Docker containers in one go.
+services:
+  api-gateway:
+    image: ydalton/bike-api-service
+    ports:
+      - 8083:8080

@@ -1,0 +1,7 @@
+# This file is intended for building the Docker containers efficiently
+# and in one attempt.
+services:
+  api-gateway:
+    build: 
+      context: ./api-gateway
+    image: ydalton/bike-api-service
