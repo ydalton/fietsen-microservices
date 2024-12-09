@@ -4,4 +4,8 @@ services:
   api-gateway:
     build: 
       context: ./api-gateway
-    image: ydalton/bike-api-service
+    image: ydalton/bike-api-gateway
+  bike-service:
+    build:
+      context: ./bike-service
+    image: ydalton/bike-service
