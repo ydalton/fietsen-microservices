@@ -11,6 +11,7 @@ jobs:
     - name: Build the Docker images with docker-compose
       run: docker compose -f docker-compose-build.yaml build
     - name: Log in
-      run: docker login -u ${{ secrets.DOCKERHUB_USER }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      # A password may have a few special shell characters so they need to be escaped properly
+      run: docker login -u "${{ secrets.DOCKERHUB_USER }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
     - name: Deploy the Docker images to Dockerhub
       run: docker compose -f docker-compose-build.yaml push
