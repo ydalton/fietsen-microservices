@@ -1,6 +1,21 @@
 # This file is for actually running the Docker containers in one go.
 services:
   api-gateway:
-    image: ydalton/bike-api-service
+    image: ydalton/bike-api-gateway
     ports:
-      - 8083:8080
+      - 8080:8083
+    depends_on:
+      - bike-service
+    environment:
+      - BIKE_SERVICE_HOST=bike-service
+  bike-service:
+    image: ydalton/bike-service
+    depends_on:
+      - db-bike
+    environment:
+      - MYSQL_DB_HOST=db-bike
+    restart: always
+  db-bike:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=abc123

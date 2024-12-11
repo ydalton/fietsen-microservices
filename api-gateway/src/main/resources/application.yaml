@@ -5,10 +5,9 @@ spring:
     gateway:
       mvc:
         routes:
-          - id: test
-            uri: http://${BIKE_SERVICE_HOST:localhost:8080}
+          - id: bike-service
+            uri: http://${BIKE_SERVICE_HOST:localhost}:8080
             predicates:
-              - Path=/test
-              - Method=GET
+              - Path=/bike
             filters:
-              - SetPath=/
+              - SetPath=/api/bike
