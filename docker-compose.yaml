@@ -2,8 +2,6 @@
 services:
   api-gateway:
     image: ydalton/bike-api-gateway
-    ports:
-      - 8080:8083
     depends_on:
       - bike-service
     environment:
@@ -19,3 +17,9 @@ services:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=abc123
+  frontend:
+    image: ydalton/frontend
+    depends_on:
+      - api-gateway
+    ports:
+      - 8080:80
