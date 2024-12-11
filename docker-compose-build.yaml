@@ -9,3 +9,7 @@ services:
     build:
       context: ./bike-service
     image: ydalton/bike-service
+  frontend:
+    build:
+      context: ./frontend
+    image: ydalton/frontend
