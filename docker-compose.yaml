@@ -4,8 +4,11 @@ services:
     image: ydalton/bike-api-gateway
     depends_on:
       - bike-service
+      - cyclist-service
     environment:
       - BIKE_SERVICE_HOST=bike-service
+      - CYCLIST_SERVICE_HOST=cyclist-service
+
   bike-service:
     image: ydalton/bike-service
     depends_on:
@@ -13,10 +16,25 @@ services:
     environment:
       - MYSQL_DB_HOST=db-bike
     restart: always
+
   db-bike:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=abc123
+
+  cyclist-service:
+    image: cyclist-service
+    depends_on:
+      - db-cyclist
+    environment:
+      - MONGODB_HOST=db-cyclist
+
+  db-cyclist:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: t3st!!!!
+
   frontend:
     image: ydalton/frontend
     depends_on:

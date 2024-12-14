@@ -8,6 +8,8 @@ spring:
           - id: bike-service
             uri: http://${BIKE_SERVICE_HOST:localhost}:8080
             predicates:
-              - Path=/api/bike
-            filters:
-              - SetPath=/api/bike
+              - Path=/api/bike/**
+          - id: cyclist-service
+            uri: http://${CYCLIST_SERVICE_HOST:localhost}:8080
+            predicates:
+              - Path=/api/cyclist/**

@@ -9,6 +9,10 @@ services:
     build:
       context: ./bike-service
     image: ydalton/bike-service
+  cyclist-service:
+    build:
+      context: ./cyclist-service
+    image: ydalton/cyclist-service
   frontend:
     build:
       context: ./frontend
