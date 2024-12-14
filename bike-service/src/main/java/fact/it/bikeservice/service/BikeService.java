@@ -22,16 +22,16 @@ public class BikeService {
     private void addBikes() {
         if(bikeRepository.count() > 0)
             return;
-        bikeRepository.save(new Bike(2019, "Model S", "Trek"));
-        bikeRepository.save(new Bike(2020, "Model X", "Specialized"));
-        bikeRepository.save(new Bike(2018, "Roadster", "Cannondale"));
-        bikeRepository.save(new Bike(2021, "Enduro", "Giant"));
-        bikeRepository.save(new Bike(2017, "Mountain Pro", "Scott"));
-        bikeRepository.save(new Bike(2022, "Speedster", "Bianchi"));
-        bikeRepository.save(new Bike(2019, "Turbo", "Merida"));
-        bikeRepository.save(new Bike(2020, "Trail Master", "Cube"));
-        bikeRepository.save(new Bike(2018, "Adventure", "Santa Cruz"));
-        bikeRepository.save(new Bike(2021, "Road King", "Yamaha"));
+        bikeRepository.save(new Bike(2019,  "Trek", "Model S"));
+        bikeRepository.save(new Bike(2020, "Specialized", "Model X"));
+        bikeRepository.save(new Bike(2018, "Cannondale", "Roadster"));
+        bikeRepository.save(new Bike(2021, "Giant", "Enduro"));
+        bikeRepository.save(new Bike(2017, "Scott", "Mountain Pro"));
+        bikeRepository.save(new Bike(2022,  "Bianchi", "Speedster"));
+        bikeRepository.save(new Bike(2019,  "Merida", "Turbo"));
+        bikeRepository.save(new Bike(2020, "Cube", "Trail Master"));
+        bikeRepository.save(new Bike(2018, "Santa Cruz", "Adventure"));
+        bikeRepository.save(new Bike(2021, "Yamaha", "Road King"));
     }
 
     public List<BikeResponse> getBikes() {
@@ -56,6 +56,10 @@ public class BikeService {
                 .build();
 
         return getBikeDto(this.bikeRepository.save(bike));
+    }
+
+    public void deleteBike(long id) {
+        bikeRepository.deleteById(id);
     }
 
     private BikeResponse getBikeDto(Bike bike) {

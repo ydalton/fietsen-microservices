@@ -16,7 +16,7 @@ public class Bike {
     private int year;
     private String model;
     private String manufacturer;
-    public Bike(int year, String model, String manufacturer) {
+    public Bike(int year, String manufacturer, String model) {
         this.year = year;
         this.model = model;
         this.manufacturer = manufacturer;

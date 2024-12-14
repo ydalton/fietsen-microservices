@@ -41,4 +41,11 @@ public class BikeController {
 
         return ResponseEntity.created(location).body(bikeResponse);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<BikeResponse> deleteBike(@PathVariable Long id) {
+        this.bikeService.deleteBike(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
