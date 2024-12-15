@@ -4,7 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 RUN apk add npm
 COPY . /app
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 FROM alpine:latest 
