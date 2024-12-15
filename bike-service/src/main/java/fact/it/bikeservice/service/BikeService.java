@@ -62,6 +62,10 @@ public class BikeService {
         bikeRepository.deleteById(id);
     }
 
+    public boolean bikeExists(long id) {
+        return bikeRepository.existsById(id);
+    }
+
     private BikeResponse getBikeDto(Bike bike) {
         return BikeResponse.builder()
                 .id(bike.getId())

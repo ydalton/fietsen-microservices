@@ -44,6 +44,9 @@ public class BikeController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<BikeResponse> deleteBike(@PathVariable Long id) {
+        if(!bikeService.bikeExists(id))
+            return ResponseEntity.notFound().build();
+
         this.bikeService.deleteBike(id);
 
         return ResponseEntity.noContent().build();
