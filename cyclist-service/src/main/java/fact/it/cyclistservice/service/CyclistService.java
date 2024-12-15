@@ -8,6 +8,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CyclistService {
@@ -42,6 +43,12 @@ public class CyclistService {
         return cyclists.stream().map(this::mapToResponse).toList();
     }
 
+    public Optional<CyclistResponse> getCyclist(String id) {
+        Optional<Cyclist> cyclist = cyclistRepository.findById(id);
+
+        return cyclist.map(this::mapToResponse);
+    }
+
     private CyclistResponse mapToResponse(Cyclist cyclist) {
         return CyclistResponse.builder()
                 .id(cyclist.getId())
@@ -50,5 +57,13 @@ public class CyclistService {
                 .firstName(cyclist.getFirstName())
                 .lastName(cyclist.getLastName())
                 .build();
+    }
+
+    public boolean exists(String id) {
+        return cyclistRepository.existsById(id);
+    }
+
+    public void deleteById(String id) {
+        this.cyclistRepository.deleteById(id);
     }
 }
