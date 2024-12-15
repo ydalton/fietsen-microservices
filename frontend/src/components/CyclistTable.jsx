@@ -17,34 +17,38 @@ export default function CyclistTable() {
     await get();
   }
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {cyclists.map((cyclist) => {
-          return (
-            <tr key={cyclist.id}>
-              <td>{cyclist.firstName}</td>
-              <td>{cyclist.lastName}</td>
-              <td>{cyclist.age}</td>
-              <td>{cyclist.gender}</td>
-              <td>
-                <button onClick={() => deleteCyclist(cyclist.id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
-  );
+  if(cyclists.length < 1) {
+    return (<p>No cyclists found.</p>)
+  } else {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cyclists.map((cyclist) => {
+            return (
+              <tr key={cyclist.id}>
+                <td>{cyclist.firstName}</td>
+                <td>{cyclist.lastName}</td>
+                <td>{cyclist.age}</td>
+                <td>{cyclist.gender}</td>
+                <td>
+                  <button onClick={() => deleteCyclist(cyclist.id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    );
+  }
 }

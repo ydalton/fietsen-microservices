@@ -17,7 +17,7 @@ export default function BikeTable() {
     await get();
   }
 
-  if(bikes.length < 0) {
+  if(bikes.length < 1) {
     return <p>No bikes found.</p>
   } else {
     return (
