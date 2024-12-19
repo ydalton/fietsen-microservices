@@ -1,2 +1,36 @@
 #+title: Cycling System Microservices Project
 [[https://github.com/ydalton/fietsen-microservices/actions/workflows/dockerhub.yml/badge.svg]]
+
+This is my microservices project for Advanced Programming Topics.
+
+** Microservices
+My topic is about cyclists. The original idea was that it would be the
+backbone of a [[https://en.wikipedia.org/wiki/Strava][Strava]]-like application, where a user can record a
+cycle trip (at the very least the start and end location), but also
+which bike was used to make this trip.
+
+These are the microservices that are in this stack:
+- Bike service: this is for viewing and modifying bikes.
+- Cyclist service: this is for viewing and modifying cyclists.
+- Trip service: this is for viewing and modifying trips.
+
+Additionally, there is a frontend which I have written in React in
+order to easily interact with these microservices.
+
+** API endpoints
+These are the known API endpoints:
+- GET /api/bike
+- GET /api/cyclist
+- GET /api/trip
+- POST /api/cyclist
+- POST /api/trip
+
+** Screenshots
+#+begin_quote
+*NOTE*: For the screenshots of the API routes, I have decided to use
+[[https://github.com/ydalton/endpoint][Endpoint]], which is an application that I have written myself, for the
+purpose of being a lightweight Postman replacement. It does not
+implement all the functionality of Postman, such as request headers,
+but I will implement that in the future. For the requests that require
+those unimplemented features, I will use Postman.
+#+end_quote
