@@ -9,21 +9,32 @@ backbone of a [[https://en.wikipedia.org/wiki/Strava][Strava]]-like application,
 cycle trip (at the very least the start and end location), but also
 which bike was used to make this trip.
 
-These are the microservices that are in this stack:
-- Bike service: this is for viewing and modifying bikes.
-- Cyclist service: this is for viewing and modifying cyclists.
-- Trip service: this is for viewing and modifying trips.
+These are the microservices involved in this application:
+| Name            | Folder in repo   | Purpose                                              |
+|-----------------+------------------+------------------------------------------------------|
+| Bike service    | bike-service/    | Viewing and modifying bikes.                         |
+| Cyclist service | cyclist-service/ | Viewing and modifying cyclists.                      |
+| Trip service    | trip-service/    | Viewing and modifying cycle trips.                   |
+| API gateway     | api-gateway      | Gateway to access the above microservices            |
+| Frontend        | frontend/        | Frontend to interact with the gateway/microservices. |
 
-Additionally, there is a frontend which I have written in React in
-order to easily interact with these microservices.
+All the microservices and the API gateway are written in Java with
+Spring Boot, and the frontend is written in React.
 
 ** API endpoints
 These are the known API endpoints:
-- GET /api/bike
-- GET /api/cyclist
-- GET /api/trip
-- POST /api/cyclist
-- POST /api/trip
+| Method | Endpoint     |
+|--------+--------------|
+| GET    | /api/bike    |
+| GET    | /api/cyclist |
+| GET    | /api/trip    |
+| POST   | /api/cyclist |
+| POST   | /api/trip    |
+
+** CI/CD pipeline
+On every push, a GitHub Actions workflow is run, which does the work
+of building each Java microservice with Maven into Docker images, as
+well as the frontend, and automatically push the images to Dockerhub.
 
 ** Screenshots
 #+begin_quote
