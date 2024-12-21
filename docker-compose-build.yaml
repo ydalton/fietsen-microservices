@@ -20,4 +20,6 @@ services:
   frontend:
     build:
       context: ./frontend
+      args:
+        - VITE_OAUTH_CLIENT_ID=${VITE_OAUTH_CLIENT_ID}
     image: ydalton/frontend
