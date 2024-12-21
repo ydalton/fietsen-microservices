@@ -8,6 +8,7 @@ import Trips from './pages/Trips';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import TripDetail from "./pages/TripDetail";
 import { RecoilRoot } from "recoil";
+import 'leaflet/dist/leaflet.css';
 
 function App() {
 
@@ -21,7 +22,6 @@ function App() {
               <Route path="/bikes" element={<Bikes />}/>
               <Route path="/cyclists" element={<Cyclists />}/>
               <Route path="/trips" element={<Trips />} />
-              <Route path="/trips/:id" element={<TripDetail />} />
             </Route>
           </Routes>
         </BrowserRouter>

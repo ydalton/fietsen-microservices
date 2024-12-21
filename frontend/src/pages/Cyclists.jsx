@@ -2,6 +2,9 @@ import CyclistTable from "../components/CyclistTable";
 
 export default function Cyclists() {
   return (
-    <CyclistTable />
+    <>
+      <h2>Cyclists</h2>
+      <CyclistTable />
+    </>
   );
 }

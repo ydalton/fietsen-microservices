@@ -3,7 +3,10 @@ export function handleError(error) {
 
   switch(error.request.status) {
   case 401:
-    message = "You are not logged in";
+    message = "You are not logged in.";
+    break;
+  case 403:
+    message = "You are not authorized to perform this action.";
     break;
   default:
     message = "An unknown error occurred.";
