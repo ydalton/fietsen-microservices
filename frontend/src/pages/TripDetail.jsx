@@ -1,10 +1,11 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import TripApi from '../services/TripApi';
+import Api from "../services/Api";
 import TripMap from "../components/TripMap";
 
 export default function TripDetail() {
   const id = useParams().id;
+  const api = new Api("http://localhost:8080/api/trip");
 
   const [trip, setTrip] = useState(null);
   const [startPos, setStartPos] = useState([0, 0]);
@@ -15,7 +16,7 @@ export default function TripDetail() {
   }, [])
 
   const get = async () => {
-    await TripApi.getById(id).then((response) => {
+    await api.getById(id).then((response) => {
       let tmp = response.data;
       setTrip(tmp);
       setStartPos([tmp.startLocation.latitude, tmp.startLocation.longitude]);

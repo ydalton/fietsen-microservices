@@ -13,7 +13,7 @@ main {
 }
 
 thead {
-    background-color: gray;
+    background-color: #111188;
     color: white;
 }
 
@@ -23,6 +23,10 @@ thead th {
 
 table, tr {
     border: 2px solid;
+}
+
+table td {
+    padding: 4px;
 }
 
 nav {
@@ -49,7 +53,16 @@ div#top {
     margin-right: 2rem;
 }
 
-nav ul a {
+#login {
+    font-weight: bold;
+}
+
+nav, nav a, button.link {
     color: white;
     text-decoration: none;
+}
+button.link {
+    background:none;
+    border:none;
+    margin-left: 0.5rem;
 }

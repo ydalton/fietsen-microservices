@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import TripApi from "../services/TripApi";
+import Api from "../services/Api";
+import { tokenState } from "../store";
+import { useRecoilState } from "recoil";
+import { handleError } from "../util";
 
 export default function TripTable() {
   const [trips, setTrips] = useState([]);
+  const [token, setToken] = useRecoilState(tokenState);
+  const api = new Api("http://localhost:8080/api/trip");
 
   useEffect(() => {
     get();
   }, [])
 
   const get = async() => {
-    await TripApi.get().then((response) => setTrips(response.data));
+    await api.get().then((response) => setTrips(response.data));
+  }
+
+  const deleteTrip = async(id, token) => {
+    await api.delete().catch((error) => handleError(error));
+    await get();
   }
 
   if(trips.length < 1) {
@@ -20,6 +30,8 @@ export default function TripTable() {
       <table>
         <thead>
           <tr>
+            <th>Start location</th>
+            <th>End location</th>
             <th>Start time</th>
             <th>End time</th>
             <th>Actions</th>
@@ -29,6 +41,8 @@ export default function TripTable() {
           {trips.map((trip) => {
             return (
               <tr key={trip.id}>
+                <td>{trip.startLocation.latitude}, {trip.startLocation.longitude}</td>
+                <td>{trip.endLocation.latitude}, {trip.endLocation.longitude}</td>
                 <td>{trip.startTime}</td>
                 <td>{trip.endTime}</td>
                 <td>
@@ -37,7 +51,7 @@ export default function TripTable() {
                       More info
                     </button>
                   </Link>
-                  <button>
+                  <button onClick={() => deleteTrip(trip.id, token)}>
                     Delete
                   </button>
                 </td>
