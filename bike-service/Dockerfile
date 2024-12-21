@@ -8,6 +8,6 @@ RUN mvn package -B -DskipTests=true
 
 FROM alpine:latest
 
-RUN apk add openjdk17-jre
+RUN apk add openjdk17-jre-headless
 COPY --from=build /app/target/*.jar /app.jar
 CMD ["java", "-jar", "/app.jar"]
