@@ -9,6 +9,9 @@ services:
       - BIKE_SERVICE_HOST=bike-service
       - CYCLIST_SERVICE_HOST=cyclist-service
       - TRIP_SERVICE_HOST=trip-service
+    secrets:
+      - oauth_client_id
+      - oauth_secret
 
   bike-service:
     image: ydalton/bike-service
@@ -56,3 +59,9 @@ services:
       - api-gateway
     ports:
       - 8080:80
+
+secrets:
+  oauth_client_id:
+    environment: GOOGLE_CLIENT_ID
+  oauth_secret:
+    environment: GOOGLE_CLIENT_SECRET
