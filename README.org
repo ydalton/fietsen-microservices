@@ -21,15 +21,33 @@ These are the microservices involved in this application:
 All the microservices and the API gateway are written in Java with
 Spring Boot, and the frontend is written in React.
 
+** Authentication
+The API gateway uses OAuth2.0 authentication from a Google Cloud
+application. Certain endpoints (particularly the ones manipulating
+data) require authentication, and if the user is not authenticated
+trying to access these routes, they will get a 401 (Unauthorized)
+error. In order to access these routes, the user must obtain a valid
+JWT token and put it in the ~Authentication~ header of their HTTP
+request.
+
+The frontend also allows the user to log in with their Google account,
+and will automatically obtain a valid token for the user when logged
+in, and fill that ~Authentication~ header whenever they make a request
+to a route needing authentication.
+
 ** API endpoints
 These are the known API endpoints:
-| Method | Endpoint     |
-|--------+--------------|
-| GET    | /api/bike    |
-| GET    | /api/cyclist |
-| GET    | /api/trip    |
-| POST   | /api/cyclist |
-| POST   | /api/trip    |
+| Method | Endpoint     | Authentication required? |
+|--------+--------------+--------------------------|
+| GET    | /api/bike    |                          |
+| GET    | /api/cyclist |                          |
+| GET    | /api/trip    |                          |
+| POST   | /api/bike    | x                        |
+| PUT    | /api/bike    | x                        |
+| DELETE | /api/bike    | x                        |
+| DELETE | /api/cyclist | x                        |
+| DELETE | /api/trip    | x                        |
+
 
 ** CI/CD pipeline
 On every push, a GitHub Actions workflow is run, which does the work
@@ -42,6 +60,6 @@ well as the frontend, and automatically push the images to Dockerhub.
 [[https://github.com/ydalton/endpoint][Endpoint]], which is an application that I have written myself, for the
 purpose of being a lightweight Postman replacement. It does not
 implement all the functionality of Postman, such as request headers,
-but I will implement that in the future. For the requests that require
-those unimplemented features, I will use Postman.
+but I will implement that in the future. For now I've added a hack to
+allow to interact with the authenticated routes.
 #+end_quote
