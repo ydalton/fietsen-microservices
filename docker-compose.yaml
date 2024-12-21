@@ -8,6 +8,7 @@ services:
     environment:
       - BIKE_SERVICE_HOST=bike-service
       - CYCLIST_SERVICE_HOST=cyclist-service
+      - TRIP_SERVICE_HOST=trip-service
 
   bike-service:
     image: ydalton/bike-service
@@ -23,13 +24,27 @@ services:
       - MYSQL_ROOT_PASSWORD=abc123
 
   cyclist-service:
-    image: cyclist-service
+    image: ydalton/cyclist-service
     depends_on:
       - db-cyclist
     environment:
       - MONGODB_HOST=db-cyclist
 
   db-cyclist:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: t3st!!!!
+
+  trip-service:
+    image: ydalton/trip-service
+    depends_on:
+      - db-trip
+    environment:
+      - MONGODB_HOST=db-trip
+      - BIKE_SERVICE_HOST=bike-service
+
+  db-trip:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
