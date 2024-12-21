@@ -17,18 +17,39 @@ thead {
     color: white;
 }
 
+thead th {
+    padding: 0.25rem;
+}
+
 table, tr {
     border: 2px solid;
 }
 
 nav {
-    background-color: gray;
+    background-color: #2222aa;
     padding: 1rem;
     margin: 0;
 }
 
 nav ul {
     display: flex;
+    align-items: center;
     list-style-type: none;
     gap: 0.5rem;
+}
+
+div#top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#title {
+    font-size: 1.5rem;
+    margin-right: 2rem;
+}
+
+nav ul a {
+    color: white;
+    text-decoration: none;
 }
