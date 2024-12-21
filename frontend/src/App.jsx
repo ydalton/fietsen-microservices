@@ -1,17 +1,15 @@
 import WelcomePage from "./pages/WelcomePage";
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
 import Layout from "./pages/Layout";
 import Bikes from "./pages/Bikes";
 import Cyclists from "./pages/Cyclists";
 import Trips from './pages/Trips';
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import TripDetail from "./pages/TripDetail";
 import { RecoilRoot } from "recoil";
+
 import 'leaflet/dist/leaflet.css';
 
 function App() {
-
   return (
     <RecoilRoot>
       <GoogleOAuthProvider clientId={import.meta.env.VITE_OAUTH_CLIENT_ID}>
