@@ -16,8 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -68,5 +67,21 @@ class TripServiceApplicationTests {
         assertEquals(0.1f, response.get().getStartLocation().getLongitude());
         assertEquals(0f, response.get().getEndLocation().getLatitude());
         assertEquals(0f, response.get().getEndLocation().getLongitude());
+    }
+
+    @Test
+    public void testWhetherTripWasDeleted() {
+        tripService.deleteById("deadbeef");
+
+        verify(tripRepository, times(1)).deleteById("deadbeef");
+    }
+
+    @Test
+    public void testWhetherTripExists() {
+        when(tripRepository.existsById("deadbeef")).thenReturn(false);
+
+        assertFalse(tripService.existsById("deadbeef"));
+
+        verify(tripRepository, times(1)).existsById("deadbeef");
     }
 }

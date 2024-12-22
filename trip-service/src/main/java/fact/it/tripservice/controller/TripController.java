@@ -28,4 +28,13 @@ public class TripController {
 
         return trip.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<TripResponse> deleteByTripId(@PathVariable("id") String tripId) {
+        if(!tripService.existsById(tripId)) {
+            return ResponseEntity.notFound().build();
+        }
+        this.tripService.deleteById(tripId);
+        return ResponseEntity.noContent().build();
+    }
 }

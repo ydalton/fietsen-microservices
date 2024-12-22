@@ -158,6 +158,14 @@ public class TripService {
         return cyclist.map(this::mapToTripResponse);
     }
 
+    public void deleteById(String id) {
+        tripRepository.deleteById(id);
+    }
+
+    public boolean existsById(String id) {
+        return tripRepository.existsById(id);
+    }
+
     private TripResponse mapToTripResponse(Trip trip) {
         return TripResponse.builder()
                 .id(trip.getId())
