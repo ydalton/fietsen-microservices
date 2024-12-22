@@ -59,12 +59,41 @@ building and testing each Java microservice with Maven into Docker
 images, as well as the frontend, and automatically push the images to
 Dockerhub.
 
-** Screenshots
+** Screenshots of endpoints
 #+begin_quote
 *NOTE*: For the screenshots of the API routes, I have decided to use
 [[https://github.com/ydalton/endpoint][Endpoint]], which is an application that I have written myself, for the
 purpose of being a lightweight Postman replacement. It does not
 implement all the functionality of Postman, such as request headers,
-but I will implement that in the future. For now I've added a hack to
-allow to interact with the authenticated routes.
+but I will implement that in the future. For now I've added a quick
+fix (not pushed to GitHub) to allow to interact with the authenticated
+routes. The token that you input in Endpoint to access those routes
+can be obtained with Postman.
 #+end_quote
+
+*** GET /api/bike
+[[./scrn/get-bike.png]]
+
+*** GET /api/bike/{id}
+[[./scrn/get-bike-id.png]]
+
+*** POST /api/bike (AUTH)
+[[./scrn/post-bike.png]]
+
+*** PUT /api/bike/{id} (AUTH)
+[[./scrn/put-bike.png]]
+
+*** DELETE /api/bike (AUTH)
+[[./scrn/delete-bike.png]]
+
+*** GET /api/cyclist
+[[./scrn/get-cyclist.png]]
+
+*** DELETE /api/cyclist (AUTH)
+[[./scrn/delete-cyclist.png]]
+
+*** GET /api/trip
+[[./scrn/get-trip.png]]
+
+*** DELETE /api/trip (AUTH)
+[[./scrn/delete-trip.png]]
