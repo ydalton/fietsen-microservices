@@ -4,6 +4,9 @@ services:
   api-gateway:
     build: 
       context: ./api-gateway
+      args:
+        - GOOGLE_CLIENT_ID=${VITE_OAUTH_CLIENT_ID}
+        - GOOGLE_CLIENT_SECRET=${VITE_OAUTH_CLIENT_SECRET}
     image: ydalton/bike-api-gateway
   bike-service:
     build:
