@@ -48,7 +48,6 @@ export default function Layout() {
           !user ?
           <GoogleLogin
             onSuccess={response => {
-              console.log(response);
               setToken(response.credential);
               setUser(jwtDecode(response.credential));
             }}
