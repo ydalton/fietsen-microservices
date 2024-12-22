@@ -5,6 +5,7 @@ import lombok.*;
 
 @Getter
 @Setter
+@Builder
 public class CyclistRequest {
     private String firstName;
     private String lastName;

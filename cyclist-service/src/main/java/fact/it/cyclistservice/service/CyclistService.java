@@ -19,7 +19,7 @@ public class CyclistService {
     }
 
     @PostConstruct
-    private void addCyclists() {
+    public void addCyclists() {
         if(cyclistRepository.count() > 0) {
             return;
         }

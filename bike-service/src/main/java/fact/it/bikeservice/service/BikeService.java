@@ -19,7 +19,7 @@ public class BikeService {
     }
 
     @PostConstruct
-    private void addBikes() {
+    public void addBikes() {
         if(bikeRepository.count() > 0)
             return;
         bikeRepository.save(new Bike(2019,  "Trek", "Model S"));
@@ -58,6 +58,16 @@ public class BikeService {
         return getBikeDto(this.bikeRepository.save(bike));
     }
 
+    public void updateBike(long id, BikeRequest bikeRequest) {
+        Optional<Bike> bike = bikeRepository.findById(id);
+        if(bike.isPresent()) {
+            bike.get().setManufacturer(bikeRequest.getManufacturer());
+            bike.get().setModel(bikeRequest.getModel());
+            bike.get().setYear(bikeRequest.getYear());
+            bikeRepository.save(bike.get());
+        }
+    }
+
     public void deleteBike(long id) {
         bikeRepository.deleteById(id);
     }
@@ -66,7 +76,7 @@ public class BikeService {
         return bikeRepository.existsById(id);
     }
 
-    private BikeResponse getBikeDto(Bike bike) {
+    public BikeResponse getBikeDto(Bike bike) {
         return BikeResponse.builder()
                 .id(bike.getId())
                 .year(bike.getYear())

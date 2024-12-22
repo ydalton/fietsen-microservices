@@ -42,6 +42,15 @@ public class BikeController {
         return ResponseEntity.created(location).body(bikeResponse);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<BikeResponse> updateBike(@RequestBody BikeRequest bikeRequest, @PathVariable Long id) {
+        if(!bikeService.bikeExists(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        bikeService.updateBike(id, bikeRequest);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<BikeResponse> deleteBike(@PathVariable Long id) {
         if(!bikeService.bikeExists(id))
