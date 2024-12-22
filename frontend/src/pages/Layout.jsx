@@ -23,7 +23,7 @@ export default function Layout() {
   function logout() {
     googleLogout();
     setUser(null);
-    setToken(token);
+    setToken(null);
   }
 
   return (
