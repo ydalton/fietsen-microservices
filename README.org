@@ -1,4 +1,5 @@
 #+title: Cycling System Microservices Project
+[[./diagram.png]]
 [[https://github.com/ydalton/fietsen-microservices/actions/workflows/dockerhub.yml/badge.svg]]
 
 This is my microservices project for Advanced Programming Topics.
@@ -48,11 +49,11 @@ These are the known API endpoints:
 | DELETE | /api/cyclist | x                        |
 | DELETE | /api/trip    | x                        |
 
-
 ** CI/CD pipeline
-On every push, a GitHub Actions workflow is run, which does the work
-of building each Java microservice with Maven into Docker images, as
-well as the frontend, and automatically push the images to Dockerhub.
+On every push, a GitHub Actions workflow is run, which does the work of
+building and testing each Java microservice with Maven into Docker
+images, as well as the frontend, and automatically push the images to
+Dockerhub.
 
 ** Screenshots
 #+begin_quote
