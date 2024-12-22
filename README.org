@@ -8,7 +8,8 @@ This is my microservices project for Advanced Programming Topics.
 My topic is about cyclists. The original idea was that it would be the
 backbone of a [[https://en.wikipedia.org/wiki/Strava][Strava]]-like application, where a user can record a
 cycle trip (at the very least the start and end location), but also
-which bike was used to make this trip.
+which bike was used to make this trip. The frontend contains a
+rudimentary CRUD view of the data.
 
 These are the microservices involved in this application:
 | Name            | Folder in repo   | Purpose                                              |
@@ -21,6 +22,9 @@ These are the microservices involved in this application:
 
 All the microservices and the API gateway are written in Java with
 Spring Boot, and the frontend is written in React.
+
+** Extras
+- 2.1 Make a frontend for your application (also containerized)
 
 ** Authentication
 The API gateway uses OAuth2.0 authentication from a Google Cloud
