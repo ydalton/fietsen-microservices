@@ -19,12 +19,14 @@ services:
       - db-bike
     environment:
       - MYSQL_DB_HOST=db-bike
+      - MYSQL_DB_USER=root
+      - MYSQL_DB_PASS=abc123
     restart: always
 
   db-bike:
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=abc123
+      MYSQL_ROOT_PASSWORD: abc123
     volumes:
       - db-bike:/var/lib/mysql
 
@@ -34,12 +36,15 @@ services:
       - db-cyclist
     environment:
       - MONGODB_HOST=db-cyclist
+      - MONGODB_USER=root
+      - MONGODB_PASS=t3st!!!2
+    restart: always
 
   db-cyclist:
     image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: t3st!!!!
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=t3st!!!2
     volumes:
       - db-cyclist:/data/db
 
@@ -49,13 +54,15 @@ services:
       - db-trip
     environment:
       - MONGODB_HOST=db-trip
-      - BIKE_SERVICE_HOST=bike-service
+      - MONGODB_USER=root
+      - MONGODB_PASS=d3dhax0r
+    restart: always
 
   db-trip:
     image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: t3st!!!!
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=d3dhax0r
     volumes:
       - db-trip:/data/db
 
